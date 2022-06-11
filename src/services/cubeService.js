@@ -1,6 +1,4 @@
-const fs = require('fs/promises');
-const { default: mongoose } = require('mongoose');
-const path = require('path');
+
 const Accessory = require('../models/Accessory');
 
 const Cube = require('../models/Cube');
