@@ -9,7 +9,7 @@ router.get('/create', (req, res) => {
 
 router.post('/create', async (req, res) => {
     const cube = req.body;
-
+    cube.owner = req.user._id
     
     if (cube.name.length < 2) {
         return res.status(400).send('Invalid request');
@@ -28,8 +28,9 @@ router.post('/create', async (req, res) => {
 
 router.get('/details/:id', async (req, res) => {
     const cube = await cubeService.getOneDetails(req.params.id).lean();
+    const isOwner = cube.owner == req.user?._id;
 
-    res.render('details', { cube });
+    res.render('details', { cube,isOwner });
 });
 
 router.get('/:cubeId/attach-accessory', async (req, res) => {
