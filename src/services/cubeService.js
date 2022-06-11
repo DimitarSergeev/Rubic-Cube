@@ -16,6 +16,7 @@ exports.getAll = async (search = '', fromInput, toInput) => {
 
 exports.getOne = (cubeId) => Cube.findById(cubeId)
 exports.edit =(cubeId,cubeData) =>  Cube.findByIdAndUpdate(cubeId,cubeData)
+exports.delete = (cubeId)=> Cube.findByIdAndDelete(cubeId)
 
 exports.getOneDetails = (cubeId) => Cube.findById(cubeId).populate('accessories');
 
