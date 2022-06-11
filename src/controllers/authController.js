@@ -1,15 +1,22 @@
 const router = require('express').Router();
 
 const authService = require('../services/authService')
+const {sessionName} = require('../constants')
 
 
 router.get('/login', (req, res) => {
     res.render('auth/login')
 })
 
-// router.post('/login',(req,res)=>{
-
-// })
+router.post('/login',async (req,res)=>{
+    const token = await authService.login(req.body)
+    if(!token){
+       res.redirect('/404')
+    }
+    res.cookie(sessionName,token,{httpOnly: true})
+       
+    res.redirect('/')
+})
 
 
 router.get('/register', (req, res) => {
@@ -23,8 +30,6 @@ router.post('/register', async (req, res) => {
     }else{
         res.redirect('/404')
     }
-
-
 })
 
 module.exports = router
